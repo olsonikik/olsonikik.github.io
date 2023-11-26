@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DecibellA</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-title" style="text-align: center;">
+        <h1>DecibellA</h1>
+    </div>
+
+    <div id="login-container">
+        <input type="text" id="username" placeholder="Username">
+        <div id="email-error" style="color: red; display: none;">You have not provided a valid email</div>
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login/Register</button>
+    </div>
+
+    <div id="app-container" style="display:none;">
+        <button onclick="showTab('decibels')">Toggle Decibel Levels</button>
+        <button onclick="showTab('schedule')">Schedule a Decibel Level Change</button>
+        <button onclick="showTab('locations')">My Locations</button>
+        <button onclick="showTab('profile')">View Profile</button>
+
+        <div id="decibels" class="tab" style="display:none;">
+            <label for="decibel-range">Decibel Level: <span id="decibel-value">65</span></label>
+            <input type="range" id="decibel-range" min="0" max="130" value="65" oninput="updateDecibelValue(this.value)">
+            <button id="confirm-decibel" onclick="confirmDecibelLevel()">Confirm</button>
+            <p id="confirmed-decibel" style="display:none;">Your decibel levels are at <span id="decibel-level">65</span></p>
+            <div id="change-decibel-container" style="display:none; margin-top: 20px;">
+                <button id="change-decibel" onclick="changeDecibelLevel()">Change your decibel levels</button>
+            </div>
+            <button onclick="goBack()">Back</button>
+        </div>
+
+        <div id="schedule" class="tab" style="display:none;">
+            <label for="decibel-schedule-range">Decibel Level: <span id="decibel-schedule-value">65</span></label>
+            <input type="range" id="decibel-schedule-range" min="1" max "130" value="65" oninput="updateDecibelScheduleValue(this.value)">
+            <button id="confirm-decibel-schedule" onclick="confirmDecibelSchedule()">Confirm</button>
+            <label for="time-schedule-range">Time: <span id="time-schedule-value">12:00</span></label>
+            <input type="range" id="time-schedule-range" min="0" max="1439" value="720" oninput="updateTimeScheduleValue(this.value)">
+            <button id="confirm-time-schedule" onclick="confirmTimeSchedule()">Confirm</button>
+            <button id="revert-schedule" style="display:none;" onclick="revertSchedule()">Revert Changes</button>
+            <button onclick="goBack()">Back</button>
+        </div>
+
+        <div id="locations" class="tab" style="display:none;">
+            <p>These were the locations where you encountered above the sound level of:</p>
+            <button onclick="goBack()">Back</button>
+        </div>
+
+        <div id="profile" class="tab" style="display:none;">
+            <p id="profile-greeting">Hi </p>
+            <p id="scheduled-change" style="display:none;"></p>
+            <button onclick="logout()">Log Out</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

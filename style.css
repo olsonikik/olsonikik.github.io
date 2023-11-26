@@ -1,0 +1,58 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #ffcccc; /* Light red background */
+}
+
+#app-title h1 {
+    text-align: center;
+    font-size: 3em;
+    color: #007bff;
+}
+
+#login-container {
+    text-align: center;
+}
+
+h1 {
+    font-size: 3em;
+    color: #007bff;
+}
+
+#email-error {
+    position: absolute;
+    margin-top: -20px;
+    font-size: 0.9em;
+    color: red;
+}
+
+input[type="text"], input[type="password"], input[type="range"] {
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.tab {
+    text-align: center; /* Center content under tabs */
+    margin-top: 20px;
+}
+
+#change-decibel-container, #revert-schedule {
+    margin-bottom: 20px;
+}
