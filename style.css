@@ -1,21 +1,21 @@
-body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #ffcccc; /* Light red background */
-}
-
 #app-title h1 {
     text-align: center;
     font-size: 3em;
     color: #007bff;
 }
 
-#login-container {
+body {
+    background-color: lightgreen;
+}
+
+#login-container, #app-container {
     text-align: center;
+}
+
+#app-container button {
+    display: block; /* Make each button a block element */
+    width: 200px; /* Set a fixed width for buttons */
+    margin: 10px auto; /* Center buttons and add spacing */
 }
 
 h1 {
@@ -24,14 +24,15 @@ h1 {
 }
 
 #email-error {
-    position: absolute;
-    margin-top: -20px;
+    text-align: center;
+    margin-top: 10px;
     font-size: 0.9em;
     color: red;
 }
 
 input[type="text"], input[type="password"], input[type="range"] {
-    margin: 10px;
+    display: block; /* Center the input elements */
+    margin: 10px auto; /* Add auto margins to center */
     padding: 10px;
     border: 1px solid #ddd;
 }
@@ -49,7 +50,7 @@ button:hover {
 }
 
 .tab {
-    text-align: center; /* Center content under tabs */
+    text-align: center;
     margin-top: 20px;
 }
 
