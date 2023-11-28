@@ -37,7 +37,7 @@
 
         <div id="schedule" class="tab" style="display:none;">
             <label for="decibel-schedule-range">Decibel Level: <span id="decibel-schedule-value">65</span></label>
-            <input type="range" id="decibel-schedule-range" min="1" max "130" value="65" oninput="updateDecibelScheduleValue(this.value)">
+            <input type="range" id="decibel-schedule-range" min="1" max="130" value="65" oninput="updateDecibelScheduleValue(this.value)">
             <button id="confirm-decibel-schedule" onclick="confirmDecibelSchedule()">Confirm</button>
             <label for="time-schedule-range">Time: <span id="time-schedule-value">12:00</span></label>
             <input type="range" id="time-schedule-range" min="0" max="1439" value="720" oninput="updateTimeScheduleValue(this.value)">
@@ -55,6 +55,7 @@
             <p id="profile-greeting">Hi </p>
             <p id="scheduled-change" style="display:none;"></p>
             <button onclick="logout()">Log Out</button>
+            <button onclick="goBack()">Back</button>
         </div>
     </div>
 
