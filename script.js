@@ -1,3 +1,11 @@
+const locationOptions = [
+    "Istar 110 decibels on Monday",
+    "Fitz 115 decibels on Saturday",
+    "Construction site calle de Alonso Cano 115 decibels on Tuesday",
+    "HOME cooking 115 decibels on Thursday",
+    "Liberty 120 decibels on Thursday"
+];
+
 function login() {
     var username = document.getElementById('username').value;
     if (!username.includes('@')) {
@@ -6,24 +14,78 @@ function login() {
     }
     document.getElementById('email-error').style.display = 'none';
     document.getElementById('login-container').style.display = 'none';
-    document.getElementById('app-container').style.display = 'block';
-    updateProfileGreeting(username);
-    document.getElementById('app-title').style.display = 'block';
-}
 
-function showTab(tabId) {
+    // Hide all tab contents
     var tabs = document.getElementsByClassName('tab');
     for (var i = 0; i < tabs.length; i++) {
         tabs[i].style.display = 'none';
     }
+
+    // Show all main menu buttons
+    var buttons = document.getElementById('app-container').getElementsByTagName('button');
+    for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i].parentNode.id === 'app-container') {
+            buttons[i].style.display = 'block';
+        }
+    }
+
+    document.getElementById('app-container').style.display = 'block';
+    updateProfileGreeting(username);
+}
+
+
+function showTab(tabId) {
+    var tabs = document.getElementsByClassName('tab');
+    var buttons = document.getElementById('app-container').getElementsByTagName('button');
+    
+    for (var i = 0; i < tabs.length; i++) {
+        tabs[i].style.display = 'none';
+    }
+
+    for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i].parentNode.id === 'app-container') {
+            buttons[i].style.display = 'none';
+        }
+    }
+
     document.getElementById(tabId).style.display = 'block';
+
+    if (tabId === 'locations') {
+        displayRandomLocations();
+    }
 }
 
 function goBack() {
     var tabs = document.getElementsByClassName('tab');
+    var buttons = document.getElementById('app-container').getElementsByTagName('button');
+    
     for (var i = 0; i < tabs.length; i++) {
         tabs[i].style.display = 'none';
     }
+
+    for (var i = 0; i < buttons.length; i++) {
+        if (buttons[i].parentNode.id === 'app-container') {
+            buttons[i].style.display = 'block';
+        }
+    }
+}
+
+function displayRandomLocations() {
+    let locations = getRandomLocations();
+    let locationsHtml = locations.map(location => `<p>${location}</p>`).join('');
+    document.getElementById('locations').innerHTML = `<p>These were the locations where you encountered above the sound level of:</p>${locationsHtml}<button onclick="goBack()">Back</button>`;
+}
+
+function getRandomLocations() {
+    let selectedLocations = [];
+    while (selectedLocations.length < 3) {
+        let randomIndex = Math.floor(Math.random() * locationOptions.length);
+        let location = locationOptions[randomIndex];
+        if (!selectedLocations.includes(location)) {
+            selectedLocations.push(location);
+        }
+    }
+    return selectedLocations;
 }
 
 function updateDecibelValue(value) {
@@ -93,9 +155,13 @@ function updateProfileGreeting(username) {
 }
 
 function logout() {
+    var tabs = document.getElementsByClassName('tab');
+    for (var i = 0; i < tabs.length; i++) {
+        tabs[i].style.display = 'none';
+    }
+
     document.getElementById('app-container').style.display = 'none';
     document.getElementById('login-container').style.display = 'block';
-    document.getElementById('app-title').style.display = 'none';
     document.getElementById('username').value = '';
     document.getElementById('password').value = '';
 }
