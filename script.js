@@ -1,9 +1,9 @@
 const locationOptions = [
-    "Istar 110 decibels on Monday",
-    "Fitz 115 decibels on Saturday",
-    "Construction site calle de Alonso Cano 115 decibels on Tuesday",
-    "HOME cooking 115 decibels on Thursday",
-    "Liberty 120 decibels on Thursday"
+    "Location: Istar Decibel level: 110 decibels Date: Monday 19th December",
+    "Location: Fitz Decibel level: 115 decibels Date: Friday 18th December",
+    "Location: Construction site calle de Alonso Cano Decibel level: 115 decibels Date 5th December",
+    "Location: HOME Decibel level: 115 decibels Date 6th December",
+    "Location: Liberty Decibel level: 120 decibels Date 8th December"
 ];
 
 function login() {
@@ -78,7 +78,7 @@ function displayRandomLocations() {
 
 function getRandomLocations() {
     let selectedLocations = [];
-    while (selectedLocations.length < 3) {
+    while (selectedLocations.length < 2) {
         let randomIndex = Math.floor(Math.random() * locationOptions.length);
         let location = locationOptions[randomIndex];
         if (!selectedLocations.includes(location)) {
