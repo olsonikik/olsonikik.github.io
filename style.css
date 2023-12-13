@@ -5,7 +5,8 @@
 }
 
 body {
-    background-color: lightgreen;
+    background-color: lightblue;
+    font-family: 'Roboto', sans-serif; /* Add this line */
 }
 
 #login-container, #app-container {
