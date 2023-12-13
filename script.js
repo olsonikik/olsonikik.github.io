@@ -1,167 +1,60 @@
-const locationOptions = [
-    "Location: Istar Decibel level: 110 decibels Date: Monday 19th December",
-    "Location: Fitz Decibel level: 115 decibels Date: Friday 18th December",
-    "Location: Construction site calle de Alonso Cano Decibel level: 115 decibels Date 5th December",
-    "Location: HOME Decibel level: 115 decibels Date 6th December",
-    "Location: Liberty Decibel level: 120 decibels Date 8th December"
-];
-
-function login() {
-    var username = document.getElementById('username').value;
-    if (!username.includes('@')) {
-        document.getElementById('email-error').style.display = 'block';
-        return;
-    }
-    document.getElementById('email-error').style.display = 'none';
-    document.getElementById('login-container').style.display = 'none';
-
-    // Hide all tab contents
-    var tabs = document.getElementsByClassName('tab');
-    for (var i = 0; i < tabs.length; i++) {
-        tabs[i].style.display = 'none';
-    }
-
-    // Show all main menu buttons
-    var buttons = document.getElementById('app-container').getElementsByTagName('button');
-    for (var i = 0; i < buttons.length; i++) {
-        if (buttons[i].parentNode.id === 'app-container') {
-            buttons[i].style.display = 'block';
-        }
-    }
-
-    document.getElementById('app-container').style.display = 'block';
-    updateProfileGreeting(username);
+#app-title h1 {
+    text-align: center;
+    font-size: 3em;
+    color: #007bff;
 }
 
-
-function showTab(tabId) {
-    var tabs = document.getElementsByClassName('tab');
-    var buttons = document.getElementById('app-container').getElementsByTagName('button');
-    
-    for (var i = 0; i < tabs.length; i++) {
-        tabs[i].style.display = 'none';
-    }
-
-    for (var i = 0; i < buttons.length; i++) {
-        if (buttons[i].parentNode.id === 'app-container') {
-            buttons[i].style.display = 'none';
-        }
-    }
-
-    document.getElementById(tabId).style.display = 'block';
-
-    if (tabId === 'locations') {
-        displayRandomLocations();
-    }
+body {
+    background-color: lightblue;
+    font-family: 'Roboto', sans-serif; /* Add this line */
 }
 
-function goBack() {
-    var tabs = document.getElementsByClassName('tab');
-    var buttons = document.getElementById('app-container').getElementsByTagName('button');
-    
-    for (var i = 0; i < tabs.length; i++) {
-        tabs[i].style.display = 'none';
-    }
-
-    for (var i = 0; i < buttons.length; i++) {
-        if (buttons[i].parentNode.id === 'app-container') {
-            buttons[i].style.display = 'block';
-        }
-    }
+#login-container, #app-container {
+    text-align: center;
 }
 
-function displayRandomLocations() {
-    let locations = getRandomLocations();
-    let locationsHtml = locations.map(location => `<p>${location}</p>`).join('');
-    document.getElementById('locations').innerHTML = `<p>These were the locations where you encountered above the sound level of:</p>${locationsHtml}<button onclick="goBack()">Back</button>`;
+#app-container button {
+    display: block; /* Make each button a block element */
+    width: 200px; /* Set a fixed width for buttons */
+    margin: 10px auto; /* Center buttons and add spacing */
 }
 
-function getRandomLocations() {
-    let selectedLocations = [];
-    while (selectedLocations.length < 2) {
-        let randomIndex = Math.floor(Math.random() * locationOptions.length);
-        let location = locationOptions[randomIndex];
-        if (!selectedLocations.includes(location)) {
-            selectedLocations.push(location);
-        }
-    }
-    return selectedLocations;
+h1 {
+    font-size: 3em;
+    color: #007bff;
 }
 
-function updateDecibelValue(value) {
-    document.getElementById('decibel-value').innerText = value;
+#email-error {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: red;
 }
 
-function confirmDecibelLevel() {
-    var decibelLevel = document.getElementById('decibel-value').innerText;
-    document.getElementById('decibel-level').innerText = decibelLevel;
-    document.getElementById('confirmed-decibel').style.display = 'block';
-    document.getElementById('decibel-range').style.display = 'none';
-    document.getElementById('confirm-decibel').style.display = 'none';
-    document.getElementById('change-decibel-container').style.display = 'block';
-    localStorage.setItem('decibelLevel', decibelLevel);
+input[type="text"], input[type="password"], input[type="range"] {
+    display: block; /* Center the input elements */
+    margin: 10px auto; /* Add auto margins to center */
+    padding: 10px;
+    border: 1px solid #ddd;
 }
 
-function changeDecibelLevel() {
-    document.getElementById('decibel-range').style.display = 'block';
-    document.getElementById('change-decibel-container').style.display = 'none';
-    document.getElementById('confirmed-decibel').style.display = 'none';
-    document.getElementById('confirm-decibel').style.display = 'block';
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
 }
 
-function updateDecibelScheduleValue(value) {
-    document.getElementById('decibel-schedule-value').innerText = value;
+button:hover {
+    background-color: #0056b3;
 }
 
-function updateTimeScheduleValue(minutes) {
-    let hours = Math.floor(minutes / 60);
-    let mins = minutes % 60;
-    document.getElementById('time-schedule-value').innerText = `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+.tab {
+    text-align: center;
+    margin-top: 20px;
 }
 
-function confirmDecibelSchedule() {
-    document.getElementById('decibel-schedule-range').style.display = 'none';
-    document.getElementById('confirm-decibel-schedule').style.display = 'none';
-    document.getElementById('revert-schedule').style.display = 'block';
-    localStorage.setItem('scheduledDecibelLevel', document.getElementById('decibel-schedule-value').innerText);
-    updateScheduledChangeInProfile();
-}
-
-function confirmTimeSchedule() {
-    document.getElementById('time-schedule-range').style.display = 'none';
-    document.getElementById('confirm-time-schedule').style.display = 'none';
-    localStorage.setItem('scheduledTime', document.getElementById('time-schedule-value').innerText);
-    updateScheduledChangeInProfile();
-}
-
-function revertSchedule() {
-    document.getElementById('decibel-schedule-range').style.display = 'block';
-    document.getElementById('time-schedule-range').style.display = 'block';
-    document.getElementById('confirm-decibel-schedule').style.display = 'block';
-    document.getElementById('confirm-time-schedule').style.display = 'block';
-    document.getElementById('revert-schedule').style.display = 'none';
-}
-
-function updateScheduledChangeInProfile() {
-    let scheduledTime = localStorage.getItem('scheduledTime') || 'Not set';
-    let scheduledDecibelLevel = localStorage.getItem('scheduledDecibelLevel') || 'Not set';
-    document.getElementById('scheduled-change').innerText = `Your decibel level will change at ${scheduledTime} at a level of ${scheduledDecibelLevel}`;
-    document.getElementById('scheduled-change').style.display = 'block';
-}
-
-function updateProfileGreeting(username) {
-    var namePart = username.split('@')[0];
-    document.getElementById('profile-greeting').innerText = 'Hi ' + namePart;
-}
-
-function logout() {
-    var tabs = document.getElementsByClassName('tab');
-    for (var i = 0; i < tabs.length; i++) {
-        tabs[i].style.display = 'none';
-    }
-
-    document.getElementById('app-container').style.display = 'none';
-    document.getElementById('login-container').style.display = 'block';
-    document.getElementById('username').value = '';
-    document.getElementById('password').value = '';
+#change-decibel-container, #revert-schedule {
+    margin-bottom: 20px;
 }
